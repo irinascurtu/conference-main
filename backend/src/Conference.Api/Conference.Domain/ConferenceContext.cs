@@ -26,7 +26,7 @@ namespace Conference.Domain
         {
             OnModelCreatingPartial(modelBuilder);
         }
-
+        
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }
