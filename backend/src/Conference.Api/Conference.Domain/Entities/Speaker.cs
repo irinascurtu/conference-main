@@ -12,7 +12,7 @@ namespace Core.Domain
             Talks = new HashSet<Talk>();
         }
 
-        //  [Key]
+        [Key]
         public int Id { get; set; }
         [Required]
         [MaxLength(50)]

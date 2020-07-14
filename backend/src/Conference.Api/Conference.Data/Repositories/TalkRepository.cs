@@ -58,8 +58,7 @@ namespace Core.Data
                 throw new ArgumentNullException(nameof(talkId));
             }
 
-            return _context.Talks
-                .Where(c => c.SpeakerId == speakerId && c.Id == talkId).FirstOrDefault();
+            return _context.Talks.FirstOrDefault(c => c.SpeakerId == speakerId && c.Id == talkId);
         }
 
         public IEnumerable<Talk> GetTalks(int speakerId)
