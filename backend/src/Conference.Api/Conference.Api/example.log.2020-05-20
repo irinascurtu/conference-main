@@ -1,0 +1,18 @@
+2020-05-20 09:50:48,543  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2020-05-20 09:50:48,569  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2020-05-20 09:50:48,573  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: D:\learning\MyGit\conference-main\backend\src\Conference.Api\Conference.Api
+ 2020-05-20 09:55:25,551  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2020-05-20 09:55:25,565  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2020-05-20 09:55:25,567  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2020-05-20 09:55:25,569  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2020-05-20 09:55:25,571  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: D:\learning\MyGit\conference-main\backend\src\Conference.Api\Conference.Api
+ 2020-05-20 09:55:25,572  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: D:\learning\MyGit\conference-main\backend\src\Conference.Api\Conference.Api
+ 2020-05-20 09:56:27,748  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2020-05-20 09:56:27,763  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Application started. Press Ctrl+C to shut down.
+ 2020-05-20 09:56:27,766  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2020-05-20 09:56:27,769  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Hosting environment: Development
+ 2020-05-20 09:56:27,770  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: D:\learning\MyGit\conference-main\backend\src\Conference.Api\Conference.Api
+ 2020-05-20 09:56:27,772  INFO Microsoft.Hosting.Lifetime.? [?] - MESSAGE: Content root path: D:\learning\MyGit\conference-main\backend\src\Conference.Api\Conference.Api
+ 2020-05-20 09:56:27,893  INFO Conference.Api.Controllers.WeatherForecastController.? [?] - MESSAGE: teshing from controller
+ 2020-05-20 09:56:27,895  INFO Conference.Api.Controllers.WeatherForecastController.? [?] - MESSAGE: teshing from controller
+ 

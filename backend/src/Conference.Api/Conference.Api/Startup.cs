@@ -33,10 +33,10 @@ namespace Conference.Api
                 options.UseSqlServer(Configuration.GetConnectionString("ConferenceDb"));
             });
 
-            services.AddDbContext<LoggingDbContext>(options =>
-            {
-                options.UseSqlServer(Configuration.GetConnectionString("LoggingDb"));
-            });
+            //services.AddDbContext<LoggingDbContext>(options =>
+            //{
+            //    options.UseSqlServer(Configuration.GetConnectionString("LoggingDb"));
+            //});
 
             services.AddScoped<ISpeakerRepository, SpeakerRepository>();
             services.AddScoped<ITalkRepository, TalkRepository>();
