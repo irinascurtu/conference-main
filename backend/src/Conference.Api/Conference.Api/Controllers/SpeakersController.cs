@@ -40,7 +40,7 @@ namespace Conference.Api.Controllers
 
         // [HttpHead]
         //using head gives 405 -> method not allowed
-        [HttpGet("{speakerId}", Name = "ById")]
+        [HttpHead("{speakerId}", Name = "CheckSpeaker")]
         public IActionResult GetSpeaker(int speakerId)
         {
 
@@ -55,7 +55,7 @@ namespace Conference.Api.Controllers
 
 
         //[HttpHead(Name = "CheckSpeaker")]
-        [HttpHead("{speakerId}", Name = "CheckSpeaker")]
+      //  [HttpHead("{speakerId}", Name = "CheckSpeaker")]
         public IActionResult CheckIfSpeakerExists(int speakerId)
         {
             var speakerExists = speakerRepository.SpeakerExists(speakerId);
