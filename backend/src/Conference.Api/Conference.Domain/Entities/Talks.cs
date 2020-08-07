@@ -2,30 +2,23 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
-namespace Core.Domain
+namespace Conference.Domain.Entities
 {
     public partial class Talk
     {
-        public Talk()
-        {
-        }
-
         [Key]
         public int Id { get; set; }
         public int SpeakerId { get; set; }
         [Required]
-        [MaxLength(100)]
+        [StringLength(100)]
         public string Title { get; set; }
         [Required]
-        [MaxLength(1500)]
+        [StringLength(1500)]
         public string Description { get; set; }
 
-        [ForeignKey("SpeakerId")]
-        public Speaker Speaker { get; set; }
-
-
-
+        [ForeignKey(nameof(SpeakerId))]
+        [InverseProperty(nameof(Entities.Speaker.Talks))]
+        public virtual Speaker Speaker { get; set; }
     }
 }

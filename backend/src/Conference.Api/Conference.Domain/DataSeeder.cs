@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Conference.Domain.Entities;
 using Core.Domain;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;

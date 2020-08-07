@@ -9,11 +9,11 @@ namespace Conference.Domain.ContextExtensions
 {
     public partial class ConferenceContext
     {
-        public DbSet<TicketSummary> TicketSummaries { get; set; }
+      //  public DbSet<TicketSummary> TicketSummaries { get; set; }
 
         public void OnModelCreatingPartial(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<TicketSummary>().HasNoKey();
+           // modelBuilder.Entity<TicketSummary>().HasNoKey();
            
         }
     }

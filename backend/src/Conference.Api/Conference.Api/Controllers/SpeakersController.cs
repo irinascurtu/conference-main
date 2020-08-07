@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Conference.Data.Repositories;
+using Conference.Domain.Entities;
 using Core.Data;
+using Core.Domain;
 using Microsoft.AspNetCore.Mvc;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 
 namespace Conference.Api.Controllers
@@ -12,11 +14,11 @@ namespace Conference.Api.Controllers
     [ApiController]
     public class SpeakersController : ControllerBase
     {
-        private readonly ISpeakerRepository _speakerRepository;
+        private readonly ISpeakerRepository speakerRepository;
 
         public SpeakersController(ISpeakerRepository speakerRepository)
         {
-            _speakerRepository = speakerRepository;
+            this.speakerRepository = speakerRepository;
         }
 
 
@@ -37,12 +39,13 @@ namespace Conference.Api.Controllers
         //    return Ok(_mapper.Map<IEnumerable<SpeakerDto>>(speakersFromRepo));
         //}
 
-        [HttpGet(Name = "GetSpeakers")]
-        [HttpHead]
-        public IActionResult GetSpeakers()
+
+        //[HttpGet(Name = "GetSpeakers")]
+        //[HttpHead]
+        [HttpGet]
+        public ActionResult<IEnumerable<Speaker>> GetSpeakers()
         {
-            var speakersFromRepo = _speakerRepository.GetSpeakers();
-          
+            var speakersFromRepo = speakerRepository.GetSpeakers();
             return Ok(speakersFromRepo);
         }
 
@@ -50,7 +53,7 @@ namespace Conference.Api.Controllers
         public IActionResult GetSpeaker(int speakerId)
         {
 
-            var speakerFromRepo = _speakerRepository.GetSpeaker(speakerId);
+            var speakerFromRepo = speakerRepository.GetSpeaker(speakerId);
 
             if (speakerFromRepo == null)
             {

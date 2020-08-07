@@ -5,19 +5,25 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.4">
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.6">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.6" />
     <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="3.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="System.Text.Json" Version="5.0.0-preview.7.20364.11" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Conference.Data\Conference.Data.csproj" />
     <ProjectReference Include="..\Conference.Domain\Conference.Domain.csproj" />
     <ProjectReference Include="..\Conference.Logging\Conference.Logging.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\NewFolder\" />
   </ItemGroup>
 
 

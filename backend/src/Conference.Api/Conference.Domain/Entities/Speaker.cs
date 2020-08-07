@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Domain
+namespace Conference.Domain.Entities
 {
     public partial class Speaker
     {
@@ -15,10 +15,10 @@ namespace Core.Domain
         [Key]
         public int Id { get; set; }
         [Required]
-        [MaxLength(50)]
+        [StringLength(50)]
         public string FirstName { get; set; }
         [Required]
-        [MaxLength(50)]
+        [StringLength(50)]
         public string LastName { get; set; }
         public string Bio { get; set; }
         public string JobTitle { get; set; }
@@ -26,6 +26,8 @@ namespace Core.Domain
         public string Email { get; set; }
         public string TwitterHandle { get; set; }
         public string CompanyName { get; set; }
+
+        [InverseProperty("Speaker")]
         public virtual ICollection<Talk> Talks { get; set; }
     }
 }

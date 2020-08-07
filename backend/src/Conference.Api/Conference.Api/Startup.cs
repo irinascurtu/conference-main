@@ -17,8 +17,14 @@ namespace Conference.Api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostEnvironment env)
         {
+            var builder = new ConfigurationBuilder().SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appSettings.json")
+                .AddJsonFile($"appSettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+
+            this.Configuration = builder.Build();
             Configuration = configuration;
         }
 
@@ -41,14 +47,20 @@ namespace Conference.Api
             services.AddScoped<ISpeakerRepository, SpeakerRepository>();
             services.AddScoped<ITalkRepository, TalkRepository>();
 
-            services.AddLogging(builder =>
-            {
-                builder.ClearProviders();
-                builder.AddProvider(new DbLoggingProvider(GetLoggingDbContext(services)));
-            });
+            //services.AddLogging(builder =>
+            //{
+            //    builder.ClearProviders();
+            //    builder.AddProvider(new DbLoggingProvider(GetLoggingDbContext(services)));
+            //});
 
-           // builder.AddProvider(new Log4NetProvider("log4net.config"));
+            // builder.AddProvider(new Log4NetProvider("log4net.config"));
             services.AddControllers();
+
+            //    .AddJsonOptions(option =>
+            //{
+            //    option.JsonSerializerOptions.PropertyNamingPolicy = null;
+            //    option.JsonSerializerOptions.MaxDepth = 256;
+            //}); ;
 
         }
 
@@ -66,12 +78,12 @@ namespace Conference.Api
 
             }
 
-            loggerFactory.AddLog4Net();
-            app.UseHttpsRedirection();
+            //  loggerFactory.AddLog4Net();
+            //   app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            //  app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

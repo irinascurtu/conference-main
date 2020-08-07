@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Conference.Domain;
+using Conference.Domain.Entities;
 using Core.Domain;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,45 +18,26 @@ namespace Conference.Data.Repositories
         IEnumerable<Speaker> GetSpeakers(IEnumerable<int> speakerIds);
         void UpdateSpeaker(Speaker speaker);
         bool Save();
-        //  PagedList<Speaker> GetSpeakers(SpeakerResourceParameters speakerResourceParameters);
     }
 
     public class SpeakerRepository : ISpeakerRepository
     {
-        private readonly ConferenceContext _context;
+        private readonly ConferenceContext context;
 
         public SpeakerRepository(ConferenceContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
 
         public void AddSpeaker(Speaker speaker)
         {
-            if (speaker == null)
-            {
-                throw new ArgumentNullException(nameof(speaker));
-            }
-
-            // the repository fills the id (instead of using identity columns)
-            speaker.Id = new int();
-
-            foreach (var talk in speaker.Talks)
-            {
-                talk.Id = new int();
-            }
-
-            _context.Speakers.Add(speaker);
+            context.Speakers.Add(speaker);
         }
 
         public bool SpeakerExists(int speakerId)
         {
-            if (speakerId == 0)
-            {
-                throw new ArgumentNullException(nameof(speakerId));
-            }
-
-            return _context.Speakers.Any(a => a.Id == speakerId);
+            return context.Speakers.Any(a => a.Id == speakerId);
         }
 
         public void DeleteSpeaker(Speaker speaker)
@@ -65,7 +47,7 @@ namespace Conference.Data.Repositories
                 throw new ArgumentNullException(nameof(speaker));
             }
 
-            _context.Speakers.Remove(speaker);
+            context.Speakers.Remove(speaker);
         }
 
         public Speaker GetSpeaker(int speakerId)
@@ -75,12 +57,12 @@ namespace Conference.Data.Repositories
                 throw new ArgumentNullException(nameof(speakerId));
             }
 
-            return _context.Speakers.FirstOrDefault(a => a.Id == speakerId);
+            return context.Speakers.FirstOrDefault(a => a.Id == speakerId);
         }
 
         public IEnumerable<Speaker> GetSpeakers()
         {
-            return _context.Speakers.Include(x=>x.Talks).ToList<Speaker>();
+            return context.Speakers.ToList();
         }
 
         public IEnumerable<Speaker> GetSpeakers(IEnumerable<int> speakerIds)
@@ -90,7 +72,7 @@ namespace Conference.Data.Repositories
                 throw new ArgumentNullException(nameof(speakerIds));
             }
 
-            return _context.Speakers.Where(a => speakerIds.Contains(a.Id))
+            return context.Speakers.Where(a => speakerIds.Contains(a.Id))
                 .OrderBy(a => a.FirstName)
                 .ThenBy(a => a.LastName)
                 .ToList();
@@ -104,7 +86,7 @@ namespace Conference.Data.Repositories
 
         public bool Save()
         {
-            return (_context.SaveChanges() >= 0);
+            return (context.SaveChanges() >= 0);
         }
 
         public void Dispose()

@@ -1,32 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using Core.Domain;
+using Conference.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Conference.Domain
 {
     public partial class ConferenceContext : DbContext
     {
+        public ConferenceContext()
+        {
+        }
+
         public ConferenceContext(DbContextOptions<ConferenceContext> options)
             : base(options)
         {
-            this.Database.EnsureCreated();
-
         }
 
-        public DbSet<Speaker> Speakers { get; set; }
-        public DbSet<Talk> Talks { get; set; }
+        public virtual DbSet<Speaker> Speakers { get; set; }
+        public virtual DbSet<Talk> Talks { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+            }
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Talk>(entity =>
+            {
+                entity.HasIndex(e => e.SpeakerId);
+            });
+
             OnModelCreatingPartial(modelBuilder);
         }
-        
+
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }
