@@ -22,9 +22,5 @@
     <ProjectReference Include="..\Conference.Logging\Conference.Logging.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\NewFolder\" />
-  </ItemGroup>
-
 
 </Project>
