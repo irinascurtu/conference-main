@@ -13,6 +13,7 @@ namespace Conference.Api.Infrastructure.MappingProfiles
         public TalkProfile()
         {
             CreateMap<Talk, TalkV1Dto>();
+            CreateMap<Talk, TalkV2Dto>();
             CreateMap<NewTalk, Talk>();
             //CreateMap<TalkUpdateDto, Talk>();
 

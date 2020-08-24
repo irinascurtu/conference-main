@@ -12,9 +12,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Conference.Api.Controllers
 {
-    [Route("api/[controller]")]
-    //[Route("api/speakers/{speakerId}/talks")]
+    [Route("api/speakers/{speakerId}/talks")]
     [ApiController]
+    [ApiVersion("1.0")]
     public class TalksController : ControllerBase
     {
         private readonly ITalkRepository talkRepository;

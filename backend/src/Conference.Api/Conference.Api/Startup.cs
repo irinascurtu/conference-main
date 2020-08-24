@@ -2,7 +2,6 @@ using System;
 using Conference.Api.Infrastructure;
 using Conference.Data.Repositories;
 using Conference.Domain;
-using Conference.Logging;
 using Conference.Logging.Data;
 using Core.Data;
 using Microsoft.AspNetCore.Builder;
@@ -12,11 +11,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Log4NetProvider = Conference.Logging.Log4NetProvider;
 using AutoMapper;
 using Conference.Api.Infrastructure.MappingProfiles;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 
 namespace Conference.Api
 {
@@ -49,47 +48,41 @@ namespace Conference.Api
             services.AddScoped<ISpeakerRepository, SpeakerRepository>();
             services.AddScoped<ITalkRepository, TalkRepository>();
 
-            services.AddControllers();
-            //services.AddControllers(options => { options.ReturnHttpNotAcceptable = true; });
-            //  .AddXmlDataContractSerializerFormatters();
+            services.AddControllers(options => { options.ReturnHttpNotAcceptable = true; })
+                .AddXmlDataContractSerializerFormatters()
+                .ConfigureApiBehaviorOptions(setupAction =>
+                {
+                    setupAction.InvalidModelStateResponseFactory = context =>
+                    {
+                        var problemDetails = new ValidationProblemDetails(context.ModelState)
+                        {
+                            Type = "https://conference-api.com/modelvalidationproblem",
+                            Title = "One or more model validation errors occurred.",
+                            Status = StatusCodes.Status422UnprocessableEntity,
+                            Detail = "See the errors property for details.",
+                            Instance = context.HttpContext.Request.Path
+                        };
 
-            #region ApiBehavior
-            //services.AddControllers()
-            //    .ConfigureApiBehaviorOptions(setupAction =>
-            //    {
-            //        setupAction.InvalidModelStateResponseFactory = context =>
-            //        {
-            //            var problemDetails = new ValidationProblemDetails(context.ModelState)
-            //            {
-            //                Type = "https://conference-api.com/modelvalidationproblem",
-            //                Title = "One or more model validation errors occurred.",
-            //                Status = StatusCodes.Status422UnprocessableEntity,
-            //                Detail = "See the errors property for details.",
-            //                Instance = context.HttpContext.Request.Path
-            //            };
+                        problemDetails.Extensions.Add("traceId", context.HttpContext.TraceIdentifier);
+                        //can be replaced with BadRequestObjectResult
+                        return new UnprocessableEntityObjectResult(problemDetails)
+                        {
+                            ContentTypes = { "application/problem+json" }
+                        };
+                    };
+                });
 
-            //            problemDetails.Extensions.Add("traceId", context.HttpContext.TraceIdentifier);
-            //can be replaced with BadRequestObjectResult
-            //            return new UnprocessableEntityObjectResult(problemDetails)
-            //            {
-            //                ContentTypes = { "application/problem+json" }
-            //            };
-            //        };
-            //    });
-            #endregion
-            #region others
+            services.AddApiVersioning(o => o.ApiVersionReader = new HeaderApiVersionReader("api-version"));
 
-            //services.AddDbContext<LoggingDbContext>(options =>
-            //{
-            //    options.UseSqlServer(Configuration.GetConnectionString("LoggingDb"));
-            //});
-            //    .AddJsonOptions(option =>
-            //{
-            //    option.JsonSerializerOptions.PropertyNamingPolicy = null;
-            //    option.JsonSerializerOptions.MaxDepth = 256;
-            //}); ;
 
-            #endregion
+            //defaults to api-version
+            //services.AddApiVersioning( 
+            //    options => options.ApiVersionReader = new QueryStringApiVersionReader());
+
+            //?v=2.0
+            //services.AddApiVersioning(
+            //    options => options.ApiVersionReader = new QueryStringApiVersionReader("v"));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
