@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Conference.Api.Infrastructure.Attributes;
 using Conference.Api.Models.Talks;
 using Conference.Data.Repositories;
 using Core.Data;
@@ -14,6 +15,7 @@ namespace Conference.Api.Controllers
     [Route("api/speakers/{speakerId}/talks")]
     [ApiController]
     [ApiVersion("2.0")]
+    //[V2]
     public class TalksV2Controller : ControllerBase
     {
         private readonly ITalkRepository talkRepository;
