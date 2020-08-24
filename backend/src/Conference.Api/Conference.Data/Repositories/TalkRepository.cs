@@ -58,9 +58,9 @@ namespace Core.Data
 
             return context.Talks
                 .Where(c => c.SpeakerId == speakerId)
-                .OrderBy(c => c.Title).ToList();
-        } 
-        
+                .OrderBy(c => c.Id).ToList();
+        }
+
         public IEnumerable<Talk> GetAllTalks()
         {
             return context.Talks.ToList();

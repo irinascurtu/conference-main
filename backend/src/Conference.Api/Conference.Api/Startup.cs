@@ -1,3 +1,4 @@
+using System;
 using Conference.Api.Infrastructure;
 using Conference.Data.Repositories;
 using Conference.Domain;
@@ -12,6 +13,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Log4NetProvider = Conference.Logging.Log4NetProvider;
+using AutoMapper;
+using Conference.Api.Infrastructure.MappingProfiles;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Conference.Api
 {
@@ -30,7 +35,6 @@ namespace Conference.Api
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
@@ -39,29 +43,53 @@ namespace Conference.Api
                 options.UseSqlServer(Configuration.GetConnectionString("ConferenceDb"));
             });
 
-            //services.AddDbContext<LoggingDbContext>(options =>
-            //{
-            //    options.UseSqlServer(Configuration.GetConnectionString("LoggingDb"));
-            //});
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddAutoMapper(typeof(TalkProfile));
 
             services.AddScoped<ISpeakerRepository, SpeakerRepository>();
             services.AddScoped<ITalkRepository, TalkRepository>();
 
-            //services.AddLogging(builder =>
-            //{
-            //    builder.ClearProviders();
-            //    builder.AddProvider(new DbLoggingProvider(GetLoggingDbContext(services)));
-            //});
-
-            // builder.AddProvider(new Log4NetProvider("log4net.config"));
             services.AddControllers();
+            //services.AddControllers(options => { options.ReturnHttpNotAcceptable = true; });
+            //  .AddXmlDataContractSerializerFormatters();
 
+            #region ApiBehavior
+            //services.AddControllers()
+            //    .ConfigureApiBehaviorOptions(setupAction =>
+            //    {
+            //        setupAction.InvalidModelStateResponseFactory = context =>
+            //        {
+            //            var problemDetails = new ValidationProblemDetails(context.ModelState)
+            //            {
+            //                Type = "https://conference-api.com/modelvalidationproblem",
+            //                Title = "One or more model validation errors occurred.",
+            //                Status = StatusCodes.Status422UnprocessableEntity,
+            //                Detail = "See the errors property for details.",
+            //                Instance = context.HttpContext.Request.Path
+            //            };
+
+            //            problemDetails.Extensions.Add("traceId", context.HttpContext.TraceIdentifier);
+            //can be replaced with BadRequestObjectResult
+            //            return new UnprocessableEntityObjectResult(problemDetails)
+            //            {
+            //                ContentTypes = { "application/problem+json" }
+            //            };
+            //        };
+            //    });
+            #endregion
+            #region others
+
+            //services.AddDbContext<LoggingDbContext>(options =>
+            //{
+            //    options.UseSqlServer(Configuration.GetConnectionString("LoggingDb"));
+            //});
             //    .AddJsonOptions(option =>
             //{
             //    option.JsonSerializerOptions.PropertyNamingPolicy = null;
             //    option.JsonSerializerOptions.MaxDepth = 256;
             //}); ;
 
+            #endregion
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -77,9 +105,6 @@ namespace Conference.Api
                 }
 
             }
-
-            //  loggerFactory.AddLog4Net();
-            //   app.UseHttpsRedirection();
 
             app.UseRouting();
 

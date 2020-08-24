@@ -38,9 +38,7 @@ namespace Conference.Api.Controllers
             return Ok(speakersFromRepo);
         }
 
-        // [HttpHead]
-        //using head gives 405 -> method not allowed
-        [HttpHead("{speakerId}", Name = "CheckSpeaker")]
+        [HttpGet("{speakerId}", Name = "CheckSpeaker")]
         public IActionResult GetSpeaker(int speakerId)
         {
 
@@ -54,8 +52,7 @@ namespace Conference.Api.Controllers
         }
 
 
-        //[HttpHead(Name = "CheckSpeaker")]
-      //  [HttpHead("{speakerId}", Name = "CheckSpeaker")]
+        [HttpHead("{speakerId}", Name = "CheckSpeaker")]
         public IActionResult CheckIfSpeakerExists(int speakerId)
         {
             var speakerExists = speakerRepository.SpeakerExists(speakerId);
@@ -67,20 +64,7 @@ namespace Conference.Api.Controllers
             return NoContent();
         }
 
-        ///todo:create more to ilustrate different status codes
-        /// + api behavior
-        [HttpPost(Name = "NewValidSpeaker")]
-        public ActionResult<Speaker> CreateSpeaker(SpeakerForCreate newSpeaker)
-        {
-            if (ModelState.IsValid)
-            {
-                //add in db
-                //return CreatedAtAction()
-            }
-            return Ok();
-        }
-
-        ///todo:create more to ilustrate different status codes
+       ///todo:create more to ilustrate different status codes
         /// + api behavior
         [HttpPut(Name = "UpdateSpeaker")]
         public ActionResult<Speaker> UpdateSpeaker(SpeakerForCreate updatedSpeaker)
