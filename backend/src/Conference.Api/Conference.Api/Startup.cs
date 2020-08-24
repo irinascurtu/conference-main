@@ -83,6 +83,19 @@ namespace Conference.Api
             //services.AddApiVersioning(
             //    options => options.ApiVersionReader = new QueryStringApiVersionReader("v"));
 
+            #region Versioning Behavior
+
+            //services.AddApiVersioning(o =>
+            //{
+            //    o.DefaultApiVersion = new ApiVersion(2, 0);
+            //    o.ReportApiVersions = true;
+            //    o.AssumeDefaultVersionWhenUnspecified = true;
+            //    o.ApiVersionReader = new HeaderApiVersionReader("api-version");
+            //    o.ErrorResponses = new ApiVersioningErrorProvider();
+            //});
+
+            #endregion
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
