@@ -13,9 +13,13 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using AutoMapper;
 using Conference.Api.Infrastructure.MappingProfiles;
+using Conference.Domain.Entities;
+using Microsoft.AspNet.OData.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.AspNet.OData.Extensions;
+using Microsoft.OData.Edm;
 
 namespace Conference.Api
 {
@@ -49,6 +53,7 @@ namespace Conference.Api
             services.AddScoped<ITalkRepository, TalkRepository>();
 
             services.AddControllers(options => { options.ReturnHttpNotAcceptable = true; })
+                .AddNewtonsoftJson() //need to add to enable api/ + odata
                 .AddXmlDataContractSerializerFormatters()
                 .ConfigureApiBehaviorOptions(setupAction =>
                 {
@@ -71,17 +76,7 @@ namespace Conference.Api
                         };
                     };
                 });
-
-            services.AddApiVersioning(o => o.ApiVersionReader = new HeaderApiVersionReader("api-version"));
-
-
-            //defaults to api-version
-            //services.AddApiVersioning( 
-            //    options => options.ApiVersionReader = new QueryStringApiVersionReader());
-
-            //?v=2.0
-            //services.AddApiVersioning(
-            //    options => options.ApiVersionReader = new QueryStringApiVersionReader("v"));
+            services.AddOData();
 
             #region Versioning Behavior
 
@@ -114,12 +109,25 @@ namespace Conference.Api
 
             app.UseRouting();
 
+
             //  app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.EnableDependencyInjection();
+                endpoints.Select().Filter().OrderBy().Count().MaxTop(10);
+               // endpoints.MapODataRoute("odata", null, GetEdmModel());
+                endpoints.MapODataRoute("odata", "odata", GetEdmModel());
             });
+        }
+
+        private IEdmModel GetEdmModel()
+        {
+            var odataBuilder = new ODataConventionModelBuilder();
+            odataBuilder.EntitySet<Speaker>("Speakers");
+
+            return odataBuilder.GetEdmModel();
         }
 
         public LoggingDbContext GetLoggingDbContext(IServiceCollection services)

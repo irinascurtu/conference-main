@@ -5,6 +5,7 @@ using Conference.Data.Repositories;
 using Conference.Domain.Entities;
 using Core.Data;
 using Core.Domain;
+using Microsoft.AspNet.OData;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
@@ -31,6 +32,7 @@ namespace Conference.Api.Controllers
         }
 
         [HttpGet(Name = "GetSpeakers")]
+        [EnableQuery]
         public ActionResult<IEnumerable<Speaker>> GetSpeakers()
         {
             var speakersFromRepo = speakerRepository.GetSpeakers();
