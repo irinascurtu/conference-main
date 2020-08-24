@@ -14,7 +14,7 @@ namespace Conference.Api.Controllers
 {
     [Route("api/speakers/{speakerId}/talks")]
     [ApiController]
-    [ApiVersion("1.0")]
+    [ApiVersion("1.0", Deprecated = true)]
     public class TalksController : ControllerBase
     {
         private readonly ITalkRepository talkRepository;
@@ -30,7 +30,8 @@ namespace Conference.Api.Controllers
             this.mapper = mapper;
         }
 
-        [HttpGet(Name = "GetTalksForSpeaker")]
+        //[HttpGet(Name = "GetTalksForSpeaker")]
+        [HttpGet(Name = "GetTalksForSpeaker"), MapToApiVersion("2.0")]
         public ActionResult<IEnumerable<TalkV1Dto>> GetTalksForSpeaker(int speakerId)
         {
             if (!speakerRepository.SpeakerExists(speakerId))
