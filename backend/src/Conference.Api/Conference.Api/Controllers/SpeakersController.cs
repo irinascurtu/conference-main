@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
+using Conference.Api.Infrastructure;
 using Conference.Api.Models.Speakers;
 using Conference.Data.Repositories;
 using Conference.Domain.Entities;
-using Core.Data;
-using Core.Domain;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
-
+using Microsoft.Net.Http.Headers;
 
 namespace Conference.Api.Controllers
 {
@@ -17,10 +19,12 @@ namespace Conference.Api.Controllers
     public class SpeakersController : ControllerBase
     {
         private readonly ISpeakerRepository speakerRepository;
+        private readonly IMapper mapper;
 
-        public SpeakersController(ISpeakerRepository speakerRepository)
+        public SpeakersController(ISpeakerRepository speakerRepository, IMapper mapper)
         {
             this.speakerRepository = speakerRepository;
+            this.mapper = mapper;
         }
 
         [HttpOptions]
@@ -30,16 +34,22 @@ namespace Conference.Api.Controllers
             return Ok();
         }
 
+
         [HttpGet(Name = "GetSpeakers")]
         public ActionResult<IEnumerable<Speaker>> GetSpeakers()
         {
             var speakersFromRepo = speakerRepository.GetSpeakers();
-            //should map from a dto //call dto instead of model
+
             return Ok(speakersFromRepo);
         }
 
-        [HttpGet("{speakerId}", Name = "CheckSpeaker")]
-        public IActionResult GetSpeaker(int speakerId)
+        [Produces("application/json",
+            "application/vnd.dni.speaker.full+json",
+            "application/vnd.dni.speaker.full.hateoas+json",
+            "application/vnd.dni.speaker.friendly.hateoas+json"
+            )]
+        [HttpGet("{speakerId}", Name = "GetSpeaker")]
+        public IActionResult GetSpeaker(int speakerId, [FromHeader(Name = "Accept")] string mediaType)
         {
 
             var speakerFromRepo = speakerRepository.GetSpeaker(speakerId);
@@ -48,8 +58,76 @@ namespace Conference.Api.Controllers
                 return NotFound();
             }
 
+            if (!MediaTypeHeaderValue.TryParse(mediaType, out MediaTypeHeaderValue parsedMediaType))
+            {
+                return BadRequest();
+            }
+
+            var includeLinks = parsedMediaType.SubTypeWithoutSuffix
+                .EndsWith("hateoas", StringComparison.InvariantCultureIgnoreCase);
+
+
+            if (parsedMediaType.SubTypeWithoutSuffix == "vnd.dni.speaker.full.hateoas")
+            {
+                var fullEntity = mapper.Map<SpeakerFullDto>(speakerFromRepo);
+                var link = new LinkHelper<SpeakerFullDto>(fullEntity);
+
+                link.Links.Add(new Link
+                {
+                    Href = Url.Link("GetSpeaker", null),
+                    Rel = "self",
+                    method = "GET"
+                });
+
+                link.Links.Add(new Link
+                {
+                    Href = Url.Link("UpdateSpeaker", new { speakerId = speakerFromRepo.Id }),
+                    Rel = "update-speaker",
+                    method = "PUT"
+                });
+
+                link.Links.Add(new Link
+                {
+                    Href = Url.Link("DeleteSpeaker", new { speakerId = speakerFromRepo.Id }),
+                    Rel = "delete-speaker",
+                    method = "DELETE"
+                });
+
+                return Ok(link);
+            }
+
+            if (parsedMediaType.SubTypeWithoutSuffix == "vnd.dni.speaker.friendly.hateoas")
+            {
+                var friendlyEntity = mapper.Map<SpeakerFriendlyDto>(speakerFromRepo);
+                var link = new LinkHelper<SpeakerFriendlyDto>(friendlyEntity);
+                link.Links.Add(new Link
+                {
+                    Href = Url.Link("GetSpeaker", null),
+                    Rel = "self",
+                    method = "GET"
+                });
+
+                link.Links.Add(new Link
+                {
+                    Href = Url.Link("UpdateSpeaker", new { speakerId = speakerFromRepo.Id }),
+                    Rel = "update-speaker",
+                    method = "PUT"
+                });
+
+                link.Links.Add(new Link
+                {
+                    Href = Url.Link("DeleteSpeaker", new { speakerId = speakerFromRepo.Id }),
+                    Rel = "delete-speaker",
+                    method = "DELETE"
+                });
+                return Ok(link);
+            }
+
             return Ok(speakerFromRepo);
+
         }
+
+
 
 
         [HttpHead("{speakerId}", Name = "CheckSpeaker")]
@@ -64,10 +142,9 @@ namespace Conference.Api.Controllers
             return NoContent();
         }
 
-       ///todo:create more to ilustrate different status codes
-        /// + api behavior
-        [HttpPut(Name = "UpdateSpeaker")]
-        public ActionResult<Speaker> UpdateSpeaker(SpeakerForCreate updatedSpeaker)
+        
+        [HttpPut("{speakerId}", Name = "UpdateSpeaker")]
+        public ActionResult<Speaker> UpdateSpeaker(int speakerId, SpeakerForCreate updatedSpeaker)
         {
             if (ModelState.IsValid)
             {
@@ -77,10 +154,9 @@ namespace Conference.Api.Controllers
             return Ok();
         }
 
-        ///todo:create more to ilustrate different status codes
-        /// + api behavior
-        [HttpPatch(Name = "PatchSpeaker")]
-        public ActionResult<Speaker> PatchSpeaker(SpeakerForCreate updatedSpeaker)
+        //[HttpDelete(Name = "DeleteSpeaker")]
+        [HttpDelete("{speakerId}", Name = "DeleteSpeaker")]
+        public ActionResult<Speaker> DeleteSpeaker(int speakerId)
         {
             return Ok();
         }

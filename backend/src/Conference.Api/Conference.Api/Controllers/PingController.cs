@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Conference.Api.Controllers
 {
     [Route("api/[controller]")]
-    [ApiVersionNeutral]
+   
     [ApiController]
     public class PingController : ControllerBase
     {

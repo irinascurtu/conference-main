@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Conference.Api.Infrastructure.Attributes
 {
-    public sealed class V2Attribute : ApiVersionAttribute
+    public sealed class V2Attribute
     {
-        public V2Attribute() : base(new ApiVersion(2, 0)) { }
+        //public V2Attribute() : base(new ApiVersion(2, 0)) { }
     }
 }

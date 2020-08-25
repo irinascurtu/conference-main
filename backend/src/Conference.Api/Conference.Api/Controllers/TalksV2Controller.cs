@@ -14,8 +14,6 @@ namespace Conference.Api.Controllers
 {
     [Route("api/speakers/{speakerId}/talks")]
     [ApiController]
-    [ApiVersion("2.0")]
-    //[V2]
     public class TalksV2Controller : ControllerBase
     {
         private readonly ITalkRepository talkRepository;

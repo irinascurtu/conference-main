@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Conference.Api.Infrastructure;
 using Conference.Data.Repositories;
 using Conference.Domain;
@@ -15,7 +16,7 @@ using AutoMapper;
 using Conference.Api.Infrastructure.MappingProfiles;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Versioning;
+using Newtonsoft.Json.Serialization;
 
 namespace Conference.Api
 {
@@ -48,8 +49,15 @@ namespace Conference.Api
             services.AddScoped<ISpeakerRepository, SpeakerRepository>();
             services.AddScoped<ITalkRepository, TalkRepository>();
 
-            services.AddControllers(options => { options.ReturnHttpNotAcceptable = true; })
-                .AddXmlDataContractSerializerFormatters()
+            services.AddControllers(options =>
+                {
+                    options.ReturnHttpNotAcceptable = true;
+                    options.RespectBrowserAcceptHeader = true;
+                })
+                .AddMvcOptions(options =>
+                {
+                    options.RespectBrowserAcceptHeader = true;
+                })
                 .ConfigureApiBehaviorOptions(setupAction =>
                 {
                     setupAction.InvalidModelStateResponseFactory = context =>
@@ -71,17 +79,6 @@ namespace Conference.Api
                         };
                     };
                 });
-
-            services.AddApiVersioning(o => o.ApiVersionReader = new HeaderApiVersionReader("api-version"));
-
-
-            //defaults to api-version
-            //services.AddApiVersioning( 
-            //    options => options.ApiVersionReader = new QueryStringApiVersionReader());
-
-            //?v=2.0
-            //services.AddApiVersioning(
-            //    options => options.ApiVersionReader = new QueryStringApiVersionReader("v"));
 
         }
 
