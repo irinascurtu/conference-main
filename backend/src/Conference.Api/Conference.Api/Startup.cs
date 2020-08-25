@@ -16,6 +16,7 @@ using AutoMapper;
 using Conference.Api.Infrastructure.MappingProfiles;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json.Serialization;
 
 namespace Conference.Api
@@ -54,9 +55,12 @@ namespace Conference.Api
                     options.ReturnHttpNotAcceptable = true;
                     options.RespectBrowserAcceptHeader = true;
                 })
+                .AddXmlDataContractSerializerFormatters()
                 .AddMvcOptions(options =>
                 {
                     options.RespectBrowserAcceptHeader = true;
+                    options.FormatterMappings.SetMediaTypeMappingForFormat(
+                        "xml", MediaTypeHeaderValue.Parse("application/vnd.dni.speaker.friendly.hateoas+xml"));
                 })
                 .ConfigureApiBehaviorOptions(setupAction =>
                 {

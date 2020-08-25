@@ -46,7 +46,8 @@ namespace Conference.Api.Controllers
         [Produces("application/json",
             "application/vnd.dni.speaker.full+json",
             "application/vnd.dni.speaker.full.hateoas+json",
-            "application/vnd.dni.speaker.friendly.hateoas+json"
+            "application/vnd.dni.speaker.friendly.hateoas+json",
+            "application/vnd.dni.speaker.friendly.hateoas+xml"
             )]
         [HttpGet("{speakerId}", Name = "GetSpeaker")]
         public IActionResult GetSpeaker(int speakerId, [FromHeader(Name = "Accept")] string mediaType)
@@ -96,6 +97,7 @@ namespace Conference.Api.Controllers
                 return Ok(link);
             }
 
+       
             if (parsedMediaType.SubTypeWithoutSuffix == "vnd.dni.speaker.friendly.hateoas")
             {
                 var friendlyEntity = mapper.Map<SpeakerFriendlyDto>(speakerFromRepo);
@@ -142,7 +144,7 @@ namespace Conference.Api.Controllers
             return NoContent();
         }
 
-        
+
         [HttpPut("{speakerId}", Name = "UpdateSpeaker")]
         public ActionResult<Speaker> UpdateSpeaker(int speakerId, SpeakerForCreate updatedSpeaker)
         {
