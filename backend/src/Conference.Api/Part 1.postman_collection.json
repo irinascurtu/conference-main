@@ -1,0 +1,796 @@
+{
+	"info": {
+		"_postman_id": "acd03f2f-760e-4fe1-859a-8cd8571e7a6c",
+		"name": "Part 1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetSpeakers ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4100/api/speakers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers"
+					]
+				},
+				"description": "Gets speakers with default accept type"
+			},
+			"response": []
+		},
+		{
+			"name": "GetSpeakers",
+			"request": {
+				"method": "HEAD",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4100/api/speakers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSpeakers options",
+			"request": {
+				"method": "OPTIONS",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4100/api/speakers/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers",
+						""
+					]
+				},
+				"description": "Gets speakers with default accept xml"
+			},
+			"response": []
+		},
+		{
+			"name": "GetSpeakersById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4100/api/speakers/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSpeakersById",
+			"request": {
+				"method": "HEAD",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4100/api/speakers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSpeakers/1 not considering Accept header",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4100/api/speakers/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers",
+						"1"
+					]
+				},
+				"description": "Gets speakers with accept xml will return 200 which is not correct"
+			},
+			"response": []
+		},
+		{
+			"name": "GetSpeakers/1 Returning xml",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4100/api/speakers/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers",
+						"1"
+					]
+				},
+				"description": "Gets speakers with default accept xml"
+			},
+			"response": []
+		},
+		{
+			"name": "[format casing] GetSpeakers/1",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4100/api/speakers/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers",
+						"1"
+					]
+				},
+				"description": "Gets speakers with default accept xml"
+			},
+			"response": []
+		},
+		{
+			"name": "speakers/1/talks - not found",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/speakers/1/talks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks"
+					]
+				},
+				"description": "Gets speakers with default accept xml"
+			},
+			"response": []
+		},
+		{
+			"name": "speakers/1/talks/1",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/speakers/1/talks/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks",
+						"1"
+					]
+				},
+				"description": "Gets speakers with default accept xml"
+			},
+			"response": []
+		},
+		{
+			"name": "speakers/1/talks/1 returning data",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4100/api/speakers/1/talks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks"
+					]
+				},
+				"description": "Gets speakers with default accept xml"
+			},
+			"response": []
+		},
+		{
+			"name": "speakers/1/talks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Building APIs like there is no tomorrow\",\r\n    \"description\": \"Builing APis is an important and hard job. you need discipline and you need to care about your consumers\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4100/api/speakers/1/talks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks"
+					]
+				},
+				"description": "returning 201 Created, Back the entity and Location header"
+			},
+			"response": []
+		},
+		{
+			"name": "speakers/1/talks/1001",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Building APIs like there is no tomorrow\",\r\n    \"description\": \"Builing APis is an important and hard job. you need discipline and you need to care about your consumers\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/speakers/1/talks/1001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks",
+						"1001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "speakers/1/talks/{id} - recently created Copy",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Building APIs like there is no tomorrow - updated in a put\",\r\n    \"description\": \"Builing APis is an important and hard job. you need discipline and you need to care about your consumers\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/speakers/1/talks/1001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks",
+						"1001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "speakers/1/talks with default validation error",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Building APIs like there is no tomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtozssmorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrow\",\r\n    \"description\": \"Builing APis is an important and hard job. you need discipline and you need to care about your consumers\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4100/api/speakers/1/talks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "speakers/1/talks with api behavior",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Building APIs like there is no tomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrowtomorrow\",\r\n    \"description\": \"Builing APis is an important and hard job. you need discipline and you need to care about your consumers\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4100/api/speakers/1/talks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks"
+					]
+				},
+				"description": "services.AddControllers()\r\n                .ConfigureApiBehaviorOptions(setupAction =>\r\n            {\r\n                setupAction.InvalidModelStateResponseFactory = context =>\r\n                {\r\n                    var problemDetails = new ValidationProblemDetails(context.ModelState)\r\n                    {\r\n                        Type = \"https://yourApi.com/modelvalidationproblem\",\r\n                        Title = \"One or more model validation errors occurred.\",\r\n                        Status = StatusCodes.Status422UnprocessableEntity,\r\n                        Detail = \"See the errors property for details.\",\r\n                        Instance = context.HttpContext.Request.Path\r\n                    };\r\n\r\n                    problemDetails.Extensions.Add(\"traceId\", context.HttpContext.TraceIdentifier);\r\n\r\n                    return new UnprocessableEntityObjectResult(problemDetails)\r\n                    {\r\n                        ContentTypes = { \"application/problem+json\" }\r\n                    };\r\n                };\r\n            });"
+			},
+			"response": []
+		},
+		{
+			"name": "speakers/1/talks/1001",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/xml",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Building APIs like there is no tomorrow\",\r\n    \"description\": \"Builing APis is an important and hard job. you need discipline and you need to care about your consumers\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4100/api/speakers/1/talks/1001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks",
+						"1001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "speakers/1/talks with validation error Copy",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json-path+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n\t\"op\":\"replace\",\n\t\"path\":\"/title\",\n\t\"value\": \"updated title with patch\"\n}]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/speakers/1/talks/1001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks",
+						"1001"
+					]
+				},
+				"description": "validation erros with configured APIBehavior"
+			},
+			"response": []
+		},
+		{
+			"name": "speakers/1/talks with validation working",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json-path+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n\t\"op\":\"replace\",\n\t\"path\":\"/title\",\n\t\"value\": \"updated title with patch\"\n}]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/speakers/1/talks/1001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks",
+						"1001"
+					]
+				},
+				"description": "validation erros with configured APIBehavior"
+			},
+			"response": []
+		},
+		{
+			"name": "speakers/1/talks with several operations",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json-path+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n\t\"op\":\"replace\",\n\t\"path\":\"/title\",\n\t\"value\": \"updated title with patch\"\n}]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/speakers/1/talks/1001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks",
+						"1001"
+					]
+				},
+				"description": "validation erros with configured APIBehavior"
+			},
+			"response": []
+		},
+		{
+			"name": "removing a non-existing property",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json-path+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n\t\"op\":\"remove\",\n\t\"path\":\"/thisdoesn't exist\"\n}]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/speakers/1/talks/1001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks",
+						"1001"
+					]
+				},
+				"description": "validation erros with configured APIBehavior"
+			},
+			"response": []
+		},
+		{
+			"name": "removing a non-existing property returns 4xx",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json-path+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n\t\"op\":\"remove\",\n\t\"path\":\"/thisdoesn't exist\"\n}]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/speakers/1/talks/1001",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks",
+						"1001"
+					]
+				},
+				"description": "validation erros with configured APIBehavior"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

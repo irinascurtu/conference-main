@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "21e7638b-e097-4563-a264-4af21ce4ec5b",
+		"name": "HAteoas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetSpeakers  HATEOAS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/speakers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"speakers"
+					]
+				},
+				"description": "Gets speakers with Pagination Header"
+			},
+			"response": []
+		},
+		{
+			"name": "full hateoas",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/vnd.dni.speaker.full.hateoas+json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/speakers/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"speakers",
+						"1"
+					]
+				},
+				"description": "Gets speakers with default accept type"
+			},
+			"response": []
+		},
+		{
+			"name": "friendly hateoas",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/vnd.dni.speaker.friendly.hateoas+json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.dni.speaker.friendly",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4100/api/speakers/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers",
+						"1"
+					]
+				},
+				"description": "Gets speakers with default accept type"
+			},
+			"response": []
+		},
+		{
+			"name": "friendly hateoas xml",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/vnd.dni.speaker.friendly.hateoas+json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/vnd.dni.speaker.friendly",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4100/api/speakers/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers",
+						"1"
+					]
+				},
+				"description": "Gets speakers with default accept type"
+			},
+			"response": []
+		},
+		{
+			"name": "2 action - same 'signature'",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/vnd.dni.speaker.full.hateoas+json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/speakers/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"speakers",
+						"1"
+					]
+				},
+				"description": "Gets speakers with default accept type"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
