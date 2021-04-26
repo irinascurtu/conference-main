@@ -48,7 +48,11 @@ namespace Conference.Api
             services.AddScoped<ISpeakerRepository, SpeakerRepository>();
             services.AddScoped<ITalkRepository, TalkRepository>();
 
-            services.AddControllers(options => { options.ReturnHttpNotAcceptable = true; })
+            services.AddControllers(options =>
+                {
+                  //  options.ReturnHttpNotAcceptable = true;
+                    options.RespectBrowserAcceptHeader = true;
+                })
                 .AddXmlDataContractSerializerFormatters()
                 .ConfigureApiBehaviorOptions(setupAction =>
                 {
@@ -72,7 +76,15 @@ namespace Conference.Api
                     };
                 });
 
-            services.AddApiVersioning(o => o.ApiVersionReader = new HeaderApiVersionReader("api-version"));
+             services.AddApiVersioning(o => o.ApiVersionReader = new UrlSegmentApiVersionReader());
+            //  services.AddApiVersioning(o => o.ApiVersionReader = new HeaderApiVersionReader("api-version"));
+
+            //   services.AddApiVersioning(o => o.ApiVersionReader = new MediaTypeApiVersionReader("v"));
+
+            //services.AddApiVersioning(o => o.ApiVersionReader = 
+            //    ApiVersionReader.Combine(new QueryStringApiVersionReader(),
+            //        new HeaderApiVersionReader("api-version"),
+            //    new MediaTypeApiVersionReader("v")));
 
 
             //defaults to api-version
