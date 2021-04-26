@@ -5,3 +5,5 @@ you can find branches for:
 - hateoas
 - Odata
 and the collections for postman
+
+- versioning-strategies branch for the https://www.youtube.com/watch?v=4fw2c_ukABM&ab_channel=dotNET 
