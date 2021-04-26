@@ -76,10 +76,10 @@ namespace Conference.Api
                     };
                 });
 
-             services.AddApiVersioning(o => o.ApiVersionReader = new UrlSegmentApiVersionReader());
-            //  services.AddApiVersioning(o => o.ApiVersionReader = new HeaderApiVersionReader("api-version"));
+            // services.AddApiVersioning(o => o.ApiVersionReader = new UrlSegmentApiVersionReader());
+             // services.AddApiVersioning(o => o.ApiVersionReader = new HeaderApiVersionReader("api-version"));
 
-            //   services.AddApiVersioning(o => o.ApiVersionReader = new MediaTypeApiVersionReader("v"));
+            services.AddApiVersioning(o => o.ApiVersionReader = new MediaTypeApiVersionReader("v"));
 
             //services.AddApiVersioning(o => o.ApiVersionReader = 
             //    ApiVersionReader.Combine(new QueryStringApiVersionReader(),

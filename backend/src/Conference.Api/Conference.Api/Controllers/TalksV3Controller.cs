@@ -11,8 +11,8 @@ using Core.Data;
 
 namespace Conference.Api.Controllers
 {
-    // [Route("api/speakers/{speakerId}/talks")]
-    [Route("api/v{version:apiVersion}/speakers/{speakerId}/talks")]
+    [Route("api/speakers/{speakerId}/talks")]
+    // [Route("api/v{version:apiVersion}/speakers/{speakerId}/talks")]
     [ApiController]
     [ApiVersion("3.0")]
     [Produces("application/json")]

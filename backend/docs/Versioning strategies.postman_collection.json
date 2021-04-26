@@ -1,0 +1,612 @@
+{
+	"info": {
+		"_postman_id": "2f4867dc-36c4-484d-913e-9c3520da3005",
+		"name": "Versioning strategies",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "0 - No version specified",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json-path+json"
+					},
+					{
+						"key": "api-version",
+						"value": "2",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4100/api/speakers/1/talks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1 - Version in URL path",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json-path+json"
+					},
+					{
+						"key": "api-version",
+						"value": "2",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4100/api/v1.0/speakers/1/talks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"v1.0",
+						"speakers",
+						"1",
+						"talks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Higher version specified",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json-path+json"
+					},
+					{
+						"key": "api-version",
+						"value": "4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4100/api/speakers/1/talks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks"
+					]
+				},
+				"description": "maps to a specific ednpoint tht respond to 2.0 version"
+			},
+			"response": []
+		},
+		{
+			"name": "2-version specified in header",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json-path+json"
+					},
+					{
+						"key": "api-version",
+						"value": "1.0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4100/api/speakers/1/talks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3 -version specified in query",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json-path+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n\t\"op\":\"replace\",\n\t\"path\":\"/title\",\n\t\"value\": \"updated title with patch\"\n}]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4100/api/speakers/1/talks?api-version=1.0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks"
+					],
+					"query": [
+						{
+							"key": "api-version",
+							"value": "1.0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "version specified in query  - v",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json-path+json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n\t\"op\":\"replace\",\n\t\"path\":\"/title\",\n\t\"value\": \"updated title with patch\"\n}]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4100/api/speakers/1/talks?v=1.0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks"
+					],
+					"query": [
+						{
+							"key": "v",
+							"value": "1.0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2 versions side by side",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json-path+json"
+					},
+					{
+						"key": "api-version",
+						"value": "2.0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n\t\"op\":\"replace\",\n\t\"path\":\"/title\",\n\t\"value\": \"updated title with patch\"\n}]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4100/api/speakers/1/talks/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deprecated",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "api-version",
+						"type": "text",
+						"value": "1.0"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n\t\"op\":\"replace\",\n\t\"path\":\"/title\",\n\t\"value\": \"updated title with patch\"\n}]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4100/api/speakers/1/talks/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks",
+						""
+					]
+				},
+				"description": "will receive a 400 bad requst"
+			},
+			"response": []
+		},
+		{
+			"name": "version neutral",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "api-version",
+						"type": "text",
+						"value": "1.0",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n\t\"op\":\"replace\",\n\t\"path\":\"/title\",\n\t\"value\": \"updated title with patch\"\n}]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4100/api/ping",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"ping"
+					]
+				},
+				"description": "will receive a 400 bad requst"
+			},
+			"response": []
+		},
+		{
+			"name": "Custom attribute",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "api-version",
+						"type": "text",
+						"value": "1.0",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n\t\"op\":\"replace\",\n\t\"path\":\"/title\",\n\t\"value\": \"updated title with patch\"\n}]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4100/api/v2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"v2"
+					]
+				},
+				"description": "will receive a 400 bad requst"
+			},
+			"response": []
+		},
+		{
+			"name": "4 - version specified in  Accept with RespectBrowser",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json;v=3.0"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json-path+json",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4100/api/speakers/1/talks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks"
+					],
+					"query": [
+						{
+							"key": "v",
+							"value": "3.0",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4 - version specified in  Accept with Return 406",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json;v=3.0"
+					},
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json-path+json",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4100/api/speakers/1/talks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"speakers",
+						"1",
+						"talks"
+					],
+					"query": [
+						{
+							"key": "v",
+							"value": "3.0",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

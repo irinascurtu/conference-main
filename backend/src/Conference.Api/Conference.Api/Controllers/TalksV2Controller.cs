@@ -12,8 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Conference.Api.Controllers
 {
-    // [Route("api/speakers/{speakerId}/talks")]
-    [Route("api/v{version:apiVersion}/speakers/{speakerId}/talks")]
+   [Route("api/speakers/{speakerId}/talks")]
+   // [Route("api/v{version:apiVersion}/speakers/{speakerId}/talks")]
 
     [ApiController]
     [ApiVersion("2.0")]
